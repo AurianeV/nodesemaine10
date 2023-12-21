@@ -1,11 +1,14 @@
-// server/models/meuble.js
-import { Schema, model } from 'mongoose';
+// models/meuble.js
+import mongoose from 'mongoose';
 
-const meubleSchema = new Schema({
-  nom: String,
-  materiaux: [{ type: Schema.Types.ObjectId, ref: 'Materiau' }],
+const meubleSchema = new mongoose.Schema({
+    nom: String,
+    categorie: String,
+    materiaux: [String],
+    motsCles: [String],
+    quantite: { type: Number, default: 1 },
 });
 
-const Meuble = model('Meuble', meubleSchema);
+const Meuble = mongoose.model('Meuble', meubleSchema);
 
 export default Meuble;

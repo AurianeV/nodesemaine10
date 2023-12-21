@@ -1,0 +1,17 @@
+
+html
+  head
+    title Liste des Meubles
+
+  body
+    each meuble in meubles
+      div
+        h2 Nom du Meuble: #{meuble.nom}
+        p Catégorie du Meuble: #{meuble.categorie}
+        p Matériaux du Meuble: 
+          each matiere in meuble.materiaux
+            | #{matiere}
+          br
+        p Mots-clés du Meuble: #{meuble.motsCles.join(', ')}
+        br
+      br

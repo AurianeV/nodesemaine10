@@ -1,27 +1,27 @@
 // server/routes/meubles.js
-import { Router } from 'express';
-const router = Router();
-import Meuble from '../models/meuble';
+import express from 'express';
+import { getMeubles, createMeuble } from '../controllers/meubleController.js';
 
-// Ajouter un meuble
+const router = express.Router();
+
+router.get('/', async (req, res) => {
+    try {
+      const meubles = await getMeubles(req, res);
+      // Commentez la ligne suivante
+      // res.json(meubles);
+    } catch (error) {
+      console.error('Erreur lors de la récupération des meubles :', error);
+      res.status(500).json({ error: 'Erreur lors de la récupération des meubles' });
+    }
+  });
+
 router.post('/ajouter', async (req, res) => {
   try {
-    const nouveauMeuble = await Meuble.create(req.body);
+    const nouveauMeuble = await createMeuble(req, res);
     res.status(201).json(nouveauMeuble);
   } catch (error) {
-    console.error(error);
-    res.status(500).json({ message: 'Erreur lors de l\'ajout du meuble.' });
-  }
-});
-
-// Obtenir la liste de tous les meubles
-router.get('/', async (req, res) => {
-  try {
-    const meubles = await Meuble.find();
-    res.status(200).json(meubles);
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ message: 'Erreur lors de la récupération des meubles.' });
+    console.error('Erreur lors de l\'ajout du meuble :', error);
+    res.status(500).json({ error: 'Erreur lors de l\'ajout du meuble' });
   }
 });
 
