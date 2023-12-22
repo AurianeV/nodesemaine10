@@ -7,8 +7,7 @@ const router = express.Router();
 router.get('/', async (req, res) => {
     try {
       const meubles = await getMeubles(req, res);
-      // Commentez la ligne suivante
-      // res.json(meubles);
+      
     } catch (error) {
       console.error('Erreur lors de la récupération des meubles :', error);
       res.status(500).json({ error: 'Erreur lors de la récupération des meubles' });

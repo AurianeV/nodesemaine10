@@ -2,6 +2,8 @@
 html
   head
     title Liste des Meubles
+    link(rel='stylesheet', href='/node_modules/bootstrap.min.css')  // Assurez-vous que le chemin est correct
+    script(src='/node_modules/bootstrap.bundle.min.js')
 
   body
     each meuble in meubles
@@ -15,3 +17,4 @@ html
         p Mots-clés du Meuble: #{meuble.motsCles.join(', ')}
         br
       br
+      

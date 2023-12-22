@@ -1,6 +1,7 @@
 // client/src/components/MeublesList.jsx
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import {Link} from 'react-router-dom'
 
 function MeublesList() {
   const [meubles, setMeubles] = useState([]);
@@ -19,22 +20,28 @@ function MeublesList() {
   }, []);
 
   return (
-    <div>
-      <h2>Liste des Meubles</h2>
-      <ul>
+    <div className="container mt-4">
+      <h2 className="mb-4">Liste des Meubles</h2>
+      <ul className="list-group">
         {Array.isArray(meubles) ? (
           meubles.map((meuble) => (
-            <li key={meuble._id}>
-              <h3>Nom du Meuble: {meuble.nom}</h3>
-              <p>Catégorie du Meuble: {meuble.categorie}</p>
+            <li key={meuble._id} className="list-group-item">
+              <h3 className="mb-1">Nom du Meuble: {meuble.nom}</h3>
+              <p className="mb-1">Catégorie du Meuble: {meuble.categorie}</p>
               {Array.isArray(meuble.materiaux) && (
-                <p>Matériaux du Meuble: {meuble.materiaux.join(', ')}</p>
+                <p className="mb-1">Matériaux du Meuble:
+                  {meuble.materiaux.map((matiere, index) => (
+                    <Link key={index} to={`/materiaux/${matiere._id}`}>
+                    <span key={index}>{matiere.nom}</span>
+                    </Link>
+                  ))}
+                </p>
               )}
-              <p>Mots-clés du Meuble: {meuble.motsCles.join(', ')}</p>
+              <p className="mb-1">Mots-clés du Meuble: {meuble.motsCles.join(', ')}</p>
             </li>
           ))
         ) : (
-          <li>Aucun meuble trouvé</li>
+          <li className="list-group-item">Aucun meuble trouvé</li>
         )}
       </ul>
     </div>
